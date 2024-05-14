@@ -63,6 +63,11 @@
         .thank-you {
             display: none;
         }
+        .accuracy-info {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #555;
+        }
     </style>
     <script>
         let latitude, longitude;
@@ -74,6 +79,10 @@
                     longitude = position.coords.longitude;
                     document.getElementById("latitude").value = latitude;
                     document.getElementById("longitude").value = longitude;
+
+                    const accuracy = position.coords.accuracy;
+                    document.getElementById("accuracy").innerText = `Location accuracy: ±${accuracy} meters`;
+                    console.log(`Location detected with an accuracy of approximately ${accuracy} meters.`);
                 }, showError);
             } else {
                 alert("Geolocation is not supported by this browser.");
@@ -156,6 +165,7 @@
                     <input type="submit" class="submit-btn" value="Submit">
                 </div>
             </form>
+            <div id="accuracy" class="accuracy-info"></div>
         </div>
         <div class="thank-you">
             <h2>Thank You!</h2>
