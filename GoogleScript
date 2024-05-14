@@ -1,42 +1,12 @@
 function doPost(e) {
-    var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('Form Responses 1');
-    var lat = parseFloat(e.parameter.latitude);
-    var lon = parseFloat(e.parameter.longitude);
-    var officeLat = 10.798398056734026; // e.g., 37.4219983
-    var officeLon = 106.61960542201997; // e.g., -122.084
-
-    var distance = getDistanceFromLatLonInKm(lat, lon, officeLat, officeLon);
-
-    // Assuming you allow a 100-meter radius
-    if (distance <= 0.1) {
-        sheet.appendRow([new Date(), e.parameter.name, e.parameter.status]);
-        return ContentService.createTextOutput('Check-In/Check-Out Successful');
-    } else {
-        return ContentService.createTextOutput('You are not at the office location.');
-    }
-}
-
-function getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {
-    var R = 6371; // Radius of the earth in km
-    var dLat = deg2rad(lat2-lat1); 
-    var dLon = deg2rad(lon2-lon1); 
-    var a = 
-        Math.sin(dLat/2) * Math.sin(dLat/2) +
-        Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * 
-        Math.sin(dLon/2) * Math.sin(dLon/2)
-        ; 
-    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
-    var d = R * c; // Distance in km
-    return d;
-}
-
-function deg2rad(deg) {
-    return deg * (Math.PI/180);
-}
-
-function showPosition(position) {
-    document.getElementById("latitude").value = position.coords.latitude;
-    document.getElementById("longitude").value = position.coords.longitude;
-    console.log(`Accuracy: ${position.coords.accuracy} meters`);
-    alert(`Location detected with an accuracy of approximately ${position.coords.accuracy} meters. For better accuracy, ensure that GPS and Wi-Fi are enabled.`);
+  const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('Sheet1');
+  const rowData = [
+    e.parameter.name,
+    e.parameter.status,
+    e.parameter.latitude,
+    e.parameter.longitude,
+    new Date()
+  ];
+  sheet.appendRow(rowData);
+  return ContentService.createTextOutput("Success").setMimeType(ContentService.MimeType.TEXT);
 }
