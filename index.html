@@ -23,15 +23,16 @@
             width: 90%;
             max-width: 400px;
             text-align: center;
+            padding-bottom: 40px;
         }
         h1 {
-            margin-bottom: 20px;
+            margin-bottom: 30px;
         }
         .form-group {
-            margin-bottom: 15px;
+            margin-bottom: 25px;
             text-align: left;
         }
-        select, input[type="text"] {
+        select {
             width: 100%;
             padding: 15px;
             font-size: 16px;
@@ -43,14 +44,16 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 15px;
+            margin-bottom: 25px;
         }
         .form-group.inline label {
-            margin: 0 10px;
-            flex: 1;
+            margin-right: 20px;
             font-size: 16px;
+            display: flex;
+            align-items: center;
         }
         .form-group.inline input[type="radio"] {
+            margin-left: 20px;
             margin-right: 10px;
             transform: scale(1.5);
         }
@@ -63,6 +66,7 @@
             cursor: pointer;
             font-size: 16px;
             width: 100%;
+            margin-top: 20px;
         }
         .submit-btn:hover {
             background: #FF7F00; /* Darker shade of orange */
@@ -74,8 +78,8 @@
         }
     </style>
     <script>
-        const officeLat = 10.8014869; // Replace with your office's latitude
-        const officeLng = 106.6570653; // Replace with your office's longitude
+        const officeLat = 10.797838; // Replace with your office's latitude
+        const officeLng = 106.619592; // Replace with your office's longitude
         const maxDistance = 500; // Maximum distance in meters
         const minTimeInterval = 15 * 60 * 1000; // 15 minutes in milliseconds
 
@@ -119,7 +123,7 @@
             const φ1 = lat1 * Math.PI/180;
             const φ2 = lat2 * Math.PI/180;
             const Δφ = (lat2-lat1) * Math.PI/180;
-            const Δλ = (lon2-lon1) * Math.PI/180;
+            const Δλ = (lon1-lon2) * Math.PI/180;
 
             const a = Math.sin(Δφ/2) * Math.sin(Δφ/2) +
                       Math.cos(φ1) * Math.cos(φ2) *
@@ -161,7 +165,7 @@
             .then(result => {
                 alert('Thank you! Your check-in/check-out has been recorded.');
                 localStorage.setItem('lastCheckTime', now);
-                window.location.href = 'https://stickeraz.com';
+                window.location.href = 'https://inphang.com';
             }).catch(error => {
                 console.error('Error:', error);
             });
@@ -176,7 +180,7 @@
 <body>
     <div class="container">
         <h1>Check-in/Check-out</h1>
-        <form id="checkinForm" action="https://script.google.com/macros/s/AKfycbxD09OSlIyIduv1LM3uZHlidm_WDb0HVcRHTEOTxtWymKjV4hfQQPYVN5QltPIGUGy8qw/exec" method="post">
+        <form id="checkinForm" action="https://script.google.com/macros/s/AKfycbzgpJp-hX0bB9qTnr1YhuqhMB9oLCUZ_1-5NrDcRRqkF6WtT3ZnZ4mZbyhyO7HdIwn8Ew/exec" method="post">
             <div class="form-group">
                 <select id="name" name="name" required style="font-size: 16px; padding: 15px;">
                     <option value="" disabled selected>Select your name</option>
@@ -186,10 +190,12 @@
                 </select>
             </div>
             <div class="form-group inline">
-                <label for="checkin">Check-in</label>
-                <input type="radio" id="checkin" name="status" value="Check-in" required>
-                <label for="checkout">Check-out</label>
-                <input type="radio" id="checkout" name="status" value="Check-out" required>
+                <label for="checkin">
+                    <input type="radio" id="checkin" name="status" value="Check-in" required> Check-in
+                </label>
+                <label for="checkout">
+                    <input type="radio" id="checkout" name="status" value="Check-out" required> Check-out
+                </label>
             </div>
             <input type="hidden" id="latitude" name="latitude">
             <input type="hidden" id="longitude" name="longitude">
