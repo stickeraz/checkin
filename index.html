@@ -17,12 +17,15 @@
         }
         .container {
             background: white;
-            padding: 10px; /* Reduced padding */
+            padding: 10px;
             border-radius: 8px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
             width: 90%;
             max-width: 400px;
             text-align: center;
+        }
+        h1 {
+            margin-bottom: 20px;
         }
         .form-group {
             margin-bottom: 15px;
@@ -30,7 +33,8 @@
         }
         select, input[type="text"] {
             width: 100%;
-            padding: 10px;
+            padding: 15px;
+            font-size: 16px;
             border: 1px solid #ddd;
             border-radius: 4px;
             box-sizing: border-box;
@@ -39,29 +43,29 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            margin-bottom: 15px;
         }
         .form-group.inline label {
             margin: 0 10px;
             flex: 1;
+            font-size: 16px;
         }
         .form-group.inline input[type="radio"] {
             margin-right: 10px;
+            transform: scale(1.5);
         }
         .submit-btn {
-            background: #4CAF50;
+            background: #FF8C00; /* Changed to orange */
             color: white;
             border: none;
-            padding: 10px 20px;
+            padding: 15px 20px;
             border-radius: 4px;
             cursor: pointer;
             font-size: 16px;
             width: 100%;
         }
         .submit-btn:hover {
-            background: #45a049;
-        }
-        .thank-you {
-            display: none;
+            background: #FF7F00; /* Darker shade of orange */
         }
         .accuracy-info {
             margin-top: 10px;
@@ -70,10 +74,12 @@
         }
     </style>
     <script>
+        const officeLat = 10.8014869; // Replace with your office's latitude
+        const officeLng = 106.6570653; // Replace with your office's longitude
+        const maxDistance = 500; // Maximum distance in meters
+        const minTimeInterval = 15 * 60 * 1000; // 15 minutes in milliseconds
+
         let latitude, longitude;
-        const officeLat = 10.79803; // Replace with your office's latitude
-        const officeLng = 106.6175941; // Replace with your office's longitude
-        const maxDistance = 300; // Maximum distance in meters
 
         function getLocation() {
             if (navigator.geolocation) {
@@ -85,7 +91,6 @@
 
                     const accuracy = position.coords.accuracy;
                     document.getElementById("accuracy").innerText = `Location accuracy: ±${accuracy} meters`;
-                    console.log(`Location detected with an accuracy of approximately ${accuracy} meters.`);
                 }, showError);
             } else {
                 alert("Geolocation is not supported by this browser.");
@@ -127,7 +132,16 @@
 
         function handleSubmit(event) {
             event.preventDefault();
-            const form = document.getElementById('checkinForm');
+
+            const now = new Date().getTime();
+            const lastCheckTime = localStorage.getItem('lastCheckTime');
+
+            if (lastCheckTime && (now - lastCheckTime) < minTimeInterval) {
+                const remainingTime = ((minTimeInterval - (now - lastCheckTime)) / 60000).toFixed(2);
+                alert(`Please wait ${remainingTime} more minutes before checking in or out again.`);
+                return;
+            }
+
             const distance = calculateDistance(latitude, longitude, officeLat, officeLng);
 
             if (distance > maxDistance) {
@@ -135,6 +149,7 @@
                 return;
             }
 
+            const form = document.getElementById('checkinForm');
             const formData = new FormData(form);
             formData.set('latitude', latitude);
             formData.set('longitude', longitude);
@@ -144,14 +159,9 @@
                 body: formData
             }).then(response => response.text())
             .then(result => {
-                document.querySelector('.form-container').style.display = 'none';
-                document.querySelector('.thank-you').style.display = 'block';
-                setTimeout(() => {
-                    document.querySelector('.thank-you').style.display = 'none';
-                    document.querySelector('.form-container').style.display = 'block';
-                    form.reset();
-                    getLocation(); // Get location again for the next check-in
-                }, 3000);
+                alert('Thank you! Your check-in/check-out has been recorded.');
+                localStorage.setItem('lastCheckTime', now);
+                window.location.href = 'https://stickeraz.com';
             }).catch(error => {
                 console.error('Error:', error);
             });
@@ -160,44 +170,32 @@
         window.onload = function() {
             getLocation();
             document.getElementById('checkinForm').addEventListener('submit', handleSubmit);
-        };
+        }
     </script>
 </head>
 <body>
     <div class="container">
-        <div class="form-container">
-            <h2>Employee Check-In/Check-Out</h2>
-            <form id="checkinForm" action="https://script.google.com/macros/s/AKfycbwtQoNdJsJVn4mdBHRe9uxNRljVPCNuO3ywf8uCvQ3e2KDzBjNj3FZRHFoEAcaVnIb4Zg/exec" method="post">
-                <div class="form-group">
-                    <select id="name" name="name" required>
-                        <option value="" disabled selected>Select your name</option>
-                        <option value="Giang">Giang</option>
-                        <option value="Nhu Y">Nhu Y</option>
-                        <option value="Thang">Thang</option>
-                    </select>
-                </div>
-                <div class="form-group inline">
-                    <label>
-                        <input type="radio" id="checkin" name="status" value="Check-In" required>
-                        Check-In
-                    </label>
-                    <label>
-                        <input type="radio" id="checkout" name="status" value="Check-Out">
-                        Check-Out
-                    </label>
-                </div>
-                <input type="hidden" id="latitude" name="latitude">
-                <input type="hidden" id="longitude" name="longitude">
-                <div class="form-group">
-                    <input type="submit" class="submit-btn" value="Submit">
-                </div>
-            </form>
-            <div id="accuracy" class="accuracy-info"></div>
-        </div>
-        <div class="thank-you">
-            <h2>Thank You!</h2>
-            <p>Your check-in/check-out has been recorded.</p>
-        </div>
+        <h1>Check-in/Check-out</h1>
+        <form id="checkinForm" action="https://script.google.com/macros/s/AKfycbxD09OSlIyIduv1LM3uZHlidm_WDb0HVcRHTEOTxtWymKjV4hfQQPYVN5QltPIGUGy8qw/exec" method="post">
+            <div class="form-group">
+                <select id="name" name="name" required style="font-size: 16px; padding: 15px;">
+                    <option value="" disabled selected>Select your name</option>
+                    <option value="Giang">Giang</option>
+                    <option value="Nhu Y">Nhu Y</option>
+                    <option value="Thang">Thang</option>
+                </select>
+            </div>
+            <div class="form-group inline">
+                <label for="checkin">Check-in</label>
+                <input type="radio" id="checkin" name="status" value="Check-in" required>
+                <label for="checkout">Check-out</label>
+                <input type="radio" id="checkout" name="status" value="Check-out" required>
+            </div>
+            <input type="hidden" id="latitude" name="latitude">
+            <input type="hidden" id="longitude" name="longitude">
+            <button type="submit" class="submit-btn">Submit</button>
+        </form>
+        <div id="accuracy" class="accuracy-info"></div>
     </div>
 </body>
 </html>
