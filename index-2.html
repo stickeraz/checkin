@@ -172,31 +172,11 @@
             document.getElementById('checkinForm').addEventListener('submit', handleSubmit);
         }
     </script>
-	<script>
-        function formatCoordinates(latLongString) {
-            // Remove dots and split the string into latitude and longitude parts
-            const parts = latLongString.replace(/[^\d.,-]/g, '').split(',');
-
-            // Convert latitude and longitude parts to decimal numbers
-            const latitude = parseFloat(parts[0].replace(/\./g, ''));
-            const longitude = parseFloat(parts[1].replace(/\./g, ''));
-
-            // Return an object with formatted latitude and longitude
-            return {
-                latitude: latitude / Math.pow(10, (parts[0].length - 3)), // Adjust decimal point position
-                longitude: longitude / Math.pow(10, (parts[1].length - 3)) // Adjust decimal point position
-            };
-        }
-
-        // Example usage:
-        const formattedCoordinates = formatCoordinates("lat 10.801.014, long 106.657.547");
-        console.log(formattedCoordinates);
-    </script>
 </head>
 <body>
     <div class="container">
         <h1>Check-in/Check-out</h1>
-        <form id="checkinForm" action="https://script.google.com/macros/s/AKfycbxD09OSlIyIduv1LM3uZHlidm_WDb0HVcRHTEOTxtWymKjV4hfQQPYVN5QltPIGUGy8qw/exec" method="post">
+        <form id="checkinForm" action="https://script.google.com/macros/s/AKfycbzM2a37ukWvgzRX9wCSba2ZScTzRf7lYHieXoIYw7TY1k41sAPjhdgQ37Ek_xl8AHkN9A/exec" method="post">
             <div class="form-group">
                 <select id="name" name="name" required style="font-size: 16px; padding: 15px;">
                     <option value="" disabled selected>Select your name</option>
