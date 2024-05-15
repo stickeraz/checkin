@@ -58,7 +58,7 @@
             transform: scale(1.5);
         }
         .submit-btn {
-            background: #FF8C00; /* Changed to orange */
+            background: #000; /* Changed to orange */
             color: white;
             border: none;
             padding: 15px 20px;
@@ -66,10 +66,10 @@
             cursor: pointer;
             font-size: 16px;
             width: 100%;
-            margin-top: 20px;
         }
         .submit-btn:hover {
-            background: #FF7F00; /* Darker shade of orange */
+            background: #fff; /* Darker shade of orange */
+			color: black;
         }
         .accuracy-info {
             margin-top: 10px;
@@ -165,7 +165,7 @@
             .then(result => {
                 alert('Thank you! Your check-in/check-out has been recorded.');
                 localStorage.setItem('lastCheckTime', now);
-                window.location.href = 'https://inphang.com';
+                window.location.href = 'https://stickeraz.com';
             }).catch(error => {
                 console.error('Error:', error);
             });
