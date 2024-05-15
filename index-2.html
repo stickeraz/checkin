@@ -87,7 +87,6 @@
 
                     const accuracy = position.coords.accuracy;
                     document.getElementById("accuracy").innerText = `Location accuracy: ±${accuracy} meters`;
-                    console.log(`Location detected with an accuracy of approximately ${accuracy} meters.`);
                 }, showError);
             } else {
                 alert("Geolocation is not supported by this browser.");
@@ -177,8 +176,8 @@
     </script>
 </head>
 <body>
-    <div class="container">
-        <form id="checkinForm" action="https://script.google.com/macros/s/AKfycbyX8Stcxt5SkxOhVW5JVfZrYCzjcYn8Pr0CZPNoQgXCkNR8-wbGoa4WQpkHYrjSSxcqDw/exec" method="post">
+    <div class="container form-container">
+        <form id="checkinForm" action="https://script.google.com/macros/s/AKfycbxD09OSlIyIduv1LM3uZHlidm_WDb0HVcRHTEOTxtWymKjV4hfQQPYVN5QltPIGUGy8qw/exec" method="post">
             <div class="form-group">
                 <label for="name">Name</label>
                 <select id="name" name="name" required>
