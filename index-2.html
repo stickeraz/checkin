@@ -119,7 +119,7 @@
             const φ1 = lat1 * Math.PI/180;
             const φ2 = lat2 * Math.PI/180;
             const Δφ = (lat2-lat1) * Math.PI/180;
-            const Δλ = (lon2-lon1) * Math.PI/180;
+            const Δλ = (lon1-lon2) * Math.PI/180;
 
             const a = Math.sin(Δφ/2) * Math.sin(Δφ/2) +
                       Math.cos(φ1) * Math.cos(φ2) *
@@ -176,13 +176,13 @@
 <body>
     <div class="container">
         <h1>Check-in/Check-out</h1>
-        <form id="checkinForm" action="https://script.google.com/macros/s/AKfycbzgpJp-hX0bB9qTnr1YhuqhMB9oLCUZ_1-5NrDcRRqkF6WtT3ZnZ4mZbyhyO7HdIwn8Ew/exec" method="post">
+        <form id="checkinForm" action="https://script.google.com/macros/s/AKfycbx74Mad4aFHvwWlNurqb4tLifTC29jTibgNvfF99cw2mG8DTUGDzdhBpUxvXMsNQ1ZptQ/exec" method="post">
             <div class="form-group">
                 <select id="name" name="name" required style="font-size: 16px; padding: 15px;">
                     <option value="" disabled selected>Select your name</option>
                     <option value="Giang">Giang</option>
-                    <option value="Nhu Y">Nhu Y</option>
-                    <option value="Thang">Thang</option>
+                    <option value="Nhu Y">Thang</option>
+                    <option value="Thang">Nguyen</option>
                 </select>
             </div>
             <div class="form-group inline">
