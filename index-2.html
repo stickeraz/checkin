@@ -67,9 +67,6 @@
         .submit-btn:hover {
             background: #FF7F00; /* Darker shade of orange */
         }
-        .thank-you {
-            display: none;
-        }
         .accuracy-info {
             margin-top: 10px;
             font-size: 14px;
@@ -162,8 +159,7 @@
                 body: formData
             }).then(response => response.text())
             .then(result => {
-                document.querySelector('.form-container').style.display = 'none';
-                document.querySelector('.thank-you').style.display = 'block';
+                alert('Thank you! Your check-in/check-out has been recorded.');
                 localStorage.setItem('lastCheckTime', now);
             }).catch(error => {
                 console.error('Error:', error);
@@ -177,7 +173,7 @@
     </script>
 </head>
 <body>
-    <div class="container form-container">
+    <div class="container">
         <h1>Check-in/Check-out</h1>
         <form id="checkinForm" action="https://script.google.com/macros/s/AKfycbxD09OSlIyIduv1LM3uZHlidm_WDb0HVcRHTEOTxtWymKjV4hfQQPYVN5QltPIGUGy8qw/exec" method="post">
             <div class="form-group">
@@ -198,9 +194,6 @@
             <input type="hidden" id="longitude" name="longitude">
             <button type="submit" class="submit-btn">Submit</button>
         </form>
-        <div class="thank-you">
-            <h3>Thank you!</h3>
-        </div>
         <div id="accuracy" class="accuracy-info"></div>
     </div>
 </body>
