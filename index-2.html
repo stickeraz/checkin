@@ -161,6 +161,7 @@
             .then(result => {
                 alert('Thank you! Your check-in/check-out has been recorded.');
                 localStorage.setItem('lastCheckTime', now);
+                window.location.href = 'https://inphang.com';
             }).catch(error => {
                 console.error('Error:', error);
             });
