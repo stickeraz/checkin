@@ -1,12 +1,13 @@
 function doPost(e) {
-  const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('Sheet1');
-  const rowData = [
-    e.parameter.name,
-    e.parameter.status,
-    e.parameter.latitude,
-    e.parameter.longitude,
-    new Date()
-  ];
-  sheet.appendRow(rowData);
-  return ContentService.createTextOutput("Success").setMimeType(ContentService.MimeType.TEXT);
+  const sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+  const params = e.parameter;
+  const timestamp = new Date();
+
+  const data = [params.name, params.status, timestamp];
+
+  // Append data to sheet
+  sheet.appendRow(data);
+
+  // Return a success response
+  return ContentService.createTextOutput("Success");
 }
