@@ -53,13 +53,13 @@ To deploy this project
 
 ## FAQ
 
-#### Question 1
+#### Do I need to pay any month fee?
 
-Answer 1
+No, until your Google Script request not be spammed then no charge, otherwise the fee will be Google Cloud fees.
 
-#### Question 2
+#### Can I scale up this form to do other jobs?
 
-Answer 2
+Yes, you can do it for import and export tracking goods in store, custom check-in/out for outside of the office jobs,...
 
 
 ## Screenshots
