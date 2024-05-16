@@ -23,7 +23,7 @@
             width: 90%;
             max-width: 400px;
             text-align: center;
-            padding-bottom: 40px;
+            padding-bottom: 30px;
         }
         h1 {
             margin-bottom: 30px;
@@ -58,19 +58,25 @@
             transform: scale(1.5);
         }
         .submit-btn {
-            background: #000; /* Changed to orange */
-            color: white;
-            border: none;
-            padding: 15px 20px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 16px;
-            width: 100%;
-        }
-        .submit-btn:hover {
-            background: #808080; /* Darker shade of orange */
-			color: black;
-        }
+    background: black; /* Black background */
+    color: white; /* White text */
+    border: none;
+    padding: 15px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 100%;
+    transition: background 0.3s, color 0.3s, border 0.3s; /* Smooth transition for background, text color, and border */
+}
+
+.submit-btn:hover {
+    background: white; /* White background on hover */
+    color: black; /* Black text on hover */
+    border: 2px solid black; /* Add a black border on hover */
+}
+
+
+		
         .accuracy-info {
             margin-top: 10px;
             font-size: 14px;
@@ -78,8 +84,8 @@
         }
     </style>
     <script>
-        const officeLat = 10.797838; // Replace with your office's latitude
-        const officeLng = 106.619592; // Replace with your office's longitude
+        const officeLat = 10.8014869; // Replace with your office's latitude
+        const officeLng = 106.6570653; // Replace with your office's longitude
         const maxDistance = 500; // Maximum distance in meters
         const minTimeInterval = 15 * 60 * 1000; // 15 minutes in milliseconds
 
@@ -180,7 +186,7 @@
 <body>
     <div class="container">
         <h1>Check-in/Check-out</h1>
-        <form id="checkinForm" action="https://script.google.com/macros/s/AKfycbzgpJp-hX0bB9qTnr1YhuqhMB9oLCUZ_1-5NrDcRRqkF6WtT3ZnZ4mZbyhyO7HdIwn8Ew/exec" method="post">
+        <form id="checkinForm" action="https://script.google.com/macros/s/AKfycbykuKuiuWPjpjjq3ksVCMKrO6gK8bJR82y85Bi3S7HhLsOAVO7YKeE4_KAnCbXa4BilmQ/exec" method="post">
             <div class="form-group">
                 <select id="name" name="name" required style="font-size: 16px; padding: 15px;">
                     <option value="" disabled selected>Select your name</option>
