@@ -31,7 +31,7 @@
             margin-bottom: 15px;
             text-align: left;
         }
-        select {
+        select, input[type="text"] {
             width: 100%;
             padding: 15px;
             font-size: 16px;
@@ -46,18 +46,16 @@
             margin-bottom: 15px;
         }
         .form-group.inline label {
-            margin-right: 10px;
+            margin: 0 10px;
+            flex: 1;
             font-size: 16px;
-            display: flex;
-            align-items: center;
         }
         .form-group.inline input[type="radio"] {
-            margin-left: 10px;
-            margin-right: 5px;
+            margin-right: 10px;
             transform: scale(1.5);
         }
         .submit-btn {
-            background: #000000; /* Changed to orange */
+            background: #FF8C00; /* Changed to orange */
             color: white;
             border: none;
             padding: 15px 20px;
@@ -67,8 +65,7 @@
             width: 100%;
         }
         .submit-btn:hover {
-            background: #fff; /* Darker shade of orange */
-            color: black;
+            background: #FF7F00; /* Darker shade of orange */
         }
         .accuracy-info {
             margin-top: 10px;
@@ -77,8 +74,8 @@
         }
     </style>
     <script>
-        const officeLat = 10.797838; // Replace with your office's latitude
-        const officeLng = 106.619592; // Replace with your office's longitude
+        const officeLat = 10.8014869; // Replace with your office's latitude
+        const officeLng = 106.6570653; // Replace with your office's longitude
         const maxDistance = 500; // Maximum distance in meters
         const minTimeInterval = 15 * 60 * 1000; // 15 minutes in milliseconds
 
@@ -164,7 +161,7 @@
             .then(result => {
                 alert('Thank you! Your check-in/check-out has been recorded.');
                 localStorage.setItem('lastCheckTime', now);
-                window.location.href = 'https://stickeraz.com';
+                window.location.href = 'https://inphang.com';
             }).catch(error => {
                 console.error('Error:', error);
             });
@@ -179,7 +176,7 @@
 <body>
     <div class="container">
         <h1>Check-in/Check-out</h1>
-        <form id="checkinForm" action="https://script.google.com/macros/s/AKfycbzgpJp-hX0bB9qTnr1YhuqhMB9oLCUZ_1-5NrDcRRqkF6WtT3ZnZ4mZbyhyO7HdIwn8Ew/exec" method="post">
+        <form id="checkinForm" action="https://script.google.com/macros/s/AKfycbykuKuiuWPjpjjq3ksVCMKrO6gK8bJR82y85Bi3S7HhLsOAVO7YKeE4_KAnCbXa4BilmQ/exec" method="post">
             <div class="form-group">
                 <select id="name" name="name" required style="font-size: 16px; padding: 15px;">
                     <option value="" disabled selected>Select your name</option>
@@ -189,12 +186,10 @@
                 </select>
             </div>
             <div class="form-group inline">
-                <label for="checkin">
-                    <input type="radio" id="checkin" name="status" value="Check-in" required> Check-in
-                </label>
-                <label for="checkout">
-                    <input type="radio" id="checkout" name="status" value="Check-out" required> Check-out
-                </label>
+                <label for="checkin">Check-in</label>
+                <input type="radio" id="checkin" name="status" value="Check-in" required>
+                <label for="checkout">Check-out</label>
+                <input type="radio" id="checkout" name="status" value="Check-out" required>
             </div>
             <input type="hidden" id="latitude" name="latitude">
             <input type="hidden" id="longitude" name="longitude">
