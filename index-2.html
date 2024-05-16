@@ -23,15 +23,16 @@
             width: 90%;
             max-width: 400px;
             text-align: center;
+            padding-bottom: 40px;
         }
         h1 {
-            margin-bottom: 20px;
+            margin-bottom: 30px;
         }
         .form-group {
-            margin-bottom: 15px;
+            margin-bottom: 25px;
             text-align: left;
         }
-        select, input[type="text"] {
+        select {
             width: 100%;
             padding: 15px;
             font-size: 16px;
@@ -43,30 +44,37 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 15px;
+            margin-bottom: 25px;
         }
         .form-group.inline label {
-            margin: 0 10px;
-            flex: 1;
+            margin-right: 20px;
             font-size: 16px;
+            display: flex;
+            align-items: center;
         }
         .form-group.inline input[type="radio"] {
+            margin-left: 20px;
             margin-right: 10px;
             transform: scale(1.5);
         }
         .submit-btn {
-            background: #FF8C00; /* Changed to orange */
-            color: white;
-            border: none;
-            padding: 15px 20px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 16px;
-            width: 100%;
-        }
-        .submit-btn:hover {
-            background: #FF7F00; /* Darker shade of orange */
-        }
+		background: black; /* Black background */
+		color: white; /* White text */
+		border: none;
+		padding: 15px 20px;
+		border-radius: 4px;
+		cursor: pointer;
+		font-size: 16px;
+		width: 100%;
+		transition: background 0.3s, color 0.3s; /* Smooth transition for background and text color */
+		}
+
+		.submit-btn:hover {
+		background: white; /* White background on hover */
+		color: black; /* Black text on hover */
+		}
+
+		
         .accuracy-info {
             margin-top: 10px;
             font-size: 14px;
@@ -186,10 +194,12 @@
                 </select>
             </div>
             <div class="form-group inline">
-                <label for="checkin">Check-in</label>
-                <input type="radio" id="checkin" name="status" value="Check-in" required>
-                <label for="checkout">Check-out</label>
-                <input type="radio" id="checkout" name="status" value="Check-out" required>
+                <label for="checkin">
+                    <input type="radio" id="checkin" name="status" value="Check-in" required> Check-in
+                </label>
+                <label for="checkout">
+                    <input type="radio" id="checkout" name="status" value="Check-out" required> Check-out
+                </label>
             </div>
             <input type="hidden" id="latitude" name="latitude">
             <input type="hidden" id="longitude" name="longitude">
