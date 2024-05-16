@@ -23,7 +23,7 @@
             width: 90%;
             max-width: 400px;
             text-align: center;
-            padding-bottom: 40px;
+            padding-bottom: 30px;
         }
         h1 {
             margin-bottom: 30px;
@@ -58,21 +58,23 @@
             transform: scale(1.5);
         }
         .submit-btn {
-		background: black; /* Black background */
-		color: white; /* White text */
-		border: none;
-		padding: 15px 20px;
-		border-radius: 4px;
-		cursor: pointer;
-		font-size: 16px;
-		width: 100%;
-		transition: background 0.3s, color 0.3s; /* Smooth transition for background and text color */
-		}
+    background: black; /* Black background */
+    color: white; /* White text */
+    border: none;
+    padding: 15px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 100%;
+    transition: background 0.3s, color 0.3s, border 0.3s; /* Smooth transition for background, text color, and border */
+}
 
-		.submit-btn:hover {
-		background: white; /* White background on hover */
-		color: black; /* Black text on hover */
-		}
+.submit-btn:hover {
+    background: white; /* White background on hover */
+    color: black; /* Black text on hover */
+    border: 2px solid black; /* Add a black border on hover */
+}
+
 
 		
         .accuracy-info {
@@ -169,7 +171,7 @@
             .then(result => {
                 alert('Thank you! Your check-in/check-out has been recorded.');
                 localStorage.setItem('lastCheckTime', now);
-                window.location.href = 'https://inphang.com';
+                window.location.href = 'https://stickeraz.com';
             }).catch(error => {
                 console.error('Error:', error);
             });
